@@ -788,10 +788,10 @@ var summerHtmlImageMapCreator = (function() {
         polygon : Polygon
     };
     Area.REGEXP = {
-        AREA : /<area(?=.*? shape="(rect|circle|poly)")(?=.*? coords="([\d ,]+?)")[\s\S]*?>/gmi,
-        HREF : / href="([\S\s]+?)"/,
-        ALT : / alt="([\S\s]+?)"/,
-        TITLE : / title="([\S\s]+?)"/,
+        area : /<area(?=.*? shape="(rect|circle|poly)")(?=.*? coords="([\d ,]+?)")[\s\S]*?>/gmi,
+        href : / href="([\S\s]+?)"/,
+        alt : / alt="([\S\s]+?)"/,
+        title : / title="([\S\s]+?)"/,
         DELIMETER : / ?, ?/
     };
     Area.HTML_NAMES_TO_AREA_NAMES = {
@@ -799,7 +799,7 @@ var summerHtmlImageMapCreator = (function() {
         circle : 'circle',
         poly : 'polygon'
     };
-    Area.ATTRIBUTES_NAMES = ['HREF', 'ALT', 'TITLE'];
+    Area.ATTRIBUTES_NAMES = ['href', 'alt', 'title'];
     
     /**
      * This method should be implemented for child-classes 
@@ -987,7 +987,7 @@ var summerHtmlImageMapCreator = (function() {
                 var result = Area.REGEXP[item].exec(htmlAreaFinded);
 
                 if (result) {
-                    attributes[name] = result[1];
+                    attributes[item] = result[1];
                 }    
             });
             
@@ -2377,9 +2377,9 @@ var summerHtmlImageMapCreator = (function() {
         return {
             load : function(object, new_x, new_y) {
                 obj = object;
-                href_attr.value = object.href ? object.href : '';
-                alt_attr.value = object.alt ? object.alt : '';
-                title_attr.value = object.title ? object.title : '';
+                href_attr.value = object._attributes.href ? object._attributes.href : '';
+                alt_attr.value = object._attributes.alt ? object._attributes.alt : '';
+                title_attr.value = object._attributes.title ? object._attributes.title : '';
                 utils.show(form);
                 if (new_x && new_y) {
                     x = new_x;
